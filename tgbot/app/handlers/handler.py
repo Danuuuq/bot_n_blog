@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from aiogram import F, Router
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message, CallbackQuery
@@ -31,7 +33,7 @@ async def cmd_posts(message: Message):
 
 @router.callback_query(F.data.startswith('page_'))
 async def paginate_posts(callback: CallbackQuery):
-    page = int(callback.data.split("_")[1])
+    page = int(callback.data.split('_')[1])
     url = (f'{settings.get_backend_url}{settings.POST_PATH}'
            f'?page={page}&size={settings.SIZE_PAGINATION}')
     async with callback.bot.backend_session.get(url) as resp:
@@ -45,13 +47,15 @@ async def paginate_posts(callback: CallbackQuery):
 
 @router.callback_query(F.data.startswith('post_'))
 async def show_post(callback: CallbackQuery):
-    post_id = int(callback.data.split("_")[1])
+    post_id = int(callback.data.split('_')[1])
     url = f'{settings.get_backend_url}{settings.POST_PATH}/{post_id}'
     async with callback.bot.backend_session.get(url) as resp:
         post = await resp.json()
+    parsed_date = datetime.fromisoformat(post['created_at'])
+    formatted_date = parsed_date.strftime('%d.%m.%Y %H:%M')
     text = (f'📝 <b>{post['title']}</b>\n\n'
             f'{post['text']}\n\n'
-            f'📅 {post['created_at']}')
+            f'📅 {formatted_date}')
     await callback.message.delete()
     await callback.message.answer(text,
                                   parse_mode='HTML',

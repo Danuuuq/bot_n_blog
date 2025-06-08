@@ -24,11 +24,11 @@ class Post(Base):
         nullable=False,
     )
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("user.id"),
+        ForeignKey('user.id'),
         nullable=False,
     )
-    user: Mapped["User"] = relationship(
-        "User",
-        back_populates="posts",
-        lazy="joined",
+    user: Mapped['User'] = relationship(
+        'User',
+        back_populates='posts',
+        lazy='joined',
     )

@@ -23,9 +23,7 @@ async def check_duplicate_title(
     post_title: str,
     session: AsyncSession
 ) -> None:
-    """Проверка на уникальность имени проекта.
-
-    Если имя не уникальное возвращается ошибка 422"""
+    """Проверка на уникальность имени проекта."""
     project = await post_crud.get_by_title(
         post_title, session
     )

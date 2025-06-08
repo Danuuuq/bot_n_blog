@@ -35,14 +35,14 @@ async def add_logging_context(
 def run_migrations() -> None:
     """Применение миграций Alembic перед запуском приложения."""
     alembic_cfg = Config(os.path.join(
-                         os.path.dirname(__file__), "alembic.ini"))
-    command.upgrade(alembic_cfg, "head")
+                         os.path.dirname(__file__), 'alembic.ini'))
+    command.upgrade(alembic_cfg, 'head')
 
 
 def main() -> None:
     """Функция запуска приложения."""
     run_migrations()
-    uvicorn.run("main:app",
+    uvicorn.run('main:app',
                 host=settings.BACKEND_HOST,
                 port=settings.BACKEND_PORT,
                 reload=True)

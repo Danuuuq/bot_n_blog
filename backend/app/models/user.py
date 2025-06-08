@@ -12,4 +12,4 @@ if TYPE_CHECKING:
 class User(SQLAlchemyBaseUserTable[int], Base):
     """Модель для пользователей."""
 
-    posts: Mapped[list["Post"]] = relationship("Post", back_populates="user")
+    posts: Mapped[list['Post']] = relationship('Post', back_populates='user')

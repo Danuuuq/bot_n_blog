@@ -8,8 +8,6 @@ services:
     env_file: .env
     volumes:
       - blog_db:/var/lib/postgresql/
-    ports:
-      - "6385:5432"
     restart: unless-stopped
 
   backend:

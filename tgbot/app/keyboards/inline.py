@@ -10,17 +10,20 @@ def main_inline_kb(posts_response) -> InlineKeyboardMarkup:
     page = posts_response.get('page')
     pages = posts_response.get('pages')
     inline_kb_list = [
-        [InlineKeyboardButton(text=post['title'], callback_data=f'post_{post["id"]}')]
+        [InlineKeyboardButton(text=post['title'],
+                              callback_data=f'post_{post['id']}')]
         for post in posts
     ]
     nav_buttons = []
     if page > 1:
         nav_buttons.append(
-            InlineKeyboardButton(text="◀️ Назад", callback_data=f"page_{page - 1}")
+            InlineKeyboardButton(text='◀️ Назад',
+                                 callback_data=f'page_{page - 1}')
         )
     if page < pages:
         nav_buttons.append(
-            InlineKeyboardButton(text="Вперёд ▶️", callback_data=f"page_{page + 1}")
+            InlineKeyboardButton(text='Вперёд ▶️',
+                                 callback_data=f'page_{page + 1}')
         )
     if nav_buttons:
         inline_kb_list.append(nav_buttons)

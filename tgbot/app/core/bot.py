@@ -17,5 +17,6 @@ dp.include_router(router)
 
 async def set_commands():
     """Добавление команд для взаимодействия с ботом"""
-    commands = [BotCommand(command='posts ', description='Все посты')]
+    commands = [BotCommand(command='start', description='Перезапустить бота'),
+                BotCommand(command='posts ', description='Все посты')]
     await bot.set_my_commands(commands, BotCommandScopeDefault())

@@ -6,7 +6,7 @@ from fastapi_pagination.customization import CustomizedPage, UseParamsFields
 
 from app.core.variables import SettingFieldDB
 
-T = TypeVar("T")
+T = TypeVar('T')
 
 CustomPage = CustomizedPage[
     Page[T],

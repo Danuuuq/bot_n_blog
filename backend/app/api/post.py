@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from fastapi_pagination import Page
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -42,6 +42,7 @@ async def get_post(
     '/',
     dependencies=[Depends(current_user)],
     response_model=PostDB,
+    status_code=status.HTTP_201_CREATED,
 )
 async def create_post(
     post: PostCreate,

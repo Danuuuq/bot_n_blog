@@ -1,5 +1,3 @@
-import os
-
 from pydantic import ValidationError
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -37,6 +35,6 @@ class Settings(BaseSettings):
 try:
     settings = Settings()
 except ValidationError as error:
-    missing_vars = [err["loc"][0] for err in error.errors()]
+    missing_vars = [err['loc'][0] for err in error.errors()]
     raise EnvironmentError(
-        f'Отсутствуют переменные окружения: {", ".join(missing_vars)}')
+        f'Отсутствуют переменные окружения: {', '.join(missing_vars)}')

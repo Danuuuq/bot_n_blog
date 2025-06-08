@@ -45,7 +45,7 @@ class CRUDBase(Generic[CreateSchemaType, UpdateSchemaType, ModelType]):
         """Создание объекта модели."""
         data = obj_in.model_dump()
         if user:
-            data["user_id"] = user.id
+            data['user_id'] = user.id
         db_obj = self.model(**data)
         session.add(db_obj)
         return await commit_change(session, db_obj)
