@@ -33,16 +33,16 @@
 ### 1. Клонировать репозиторий
 
 ```bash
-git clone https://github.com/your-user/bot_n_blog.git
-cd bot_n_blog
+git clone git@github.com:<your-user>/bot_n_blog.git
+cd bot_n_blog/infra
 ```
 
 ### 2. Настроить переменные окружения
 
-В директории `infra` находится шаблон файла `.env.example`, который содержит все необходимые переменные. Скопируйте его как `.env` и укажите свои значения для переменных (для локального теста поменяйте только TOKEN_TG):
+В директории `infra` находится шаблон файла `.env.example`, который содержит все необходимые переменные. Скопируйте его как `.env` и укажите свои значения для переменных **для локального теста поменяйте только TOKEN_TG**:
 
 ```bash
-cp infra/.env.example infra/.env
+cp .env.example .env
 ```
 
 **Описание переменных:**
@@ -74,10 +74,16 @@ cp infra/.env.example infra/.env
 
 ### 3. Собрать и запустить проект
 
-Перейдите в директорию `infra` и выполните команду:
+Находясь в директории `infra` выполните команду:
 
 ```bash
-docker-compose up --build
+sudo docker compose up --build
+```
+
+Для запуска в фоновом режиме:
+
+```bash
+sudo docker compose up -d --build
 ```
 
 > ❗ Миграции выполняются автоматически при запуске backend-контейнера.

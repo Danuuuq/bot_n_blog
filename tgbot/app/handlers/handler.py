@@ -50,6 +50,9 @@ async def show_post(callback: CallbackQuery):
     post_id = int(callback.data.split('_')[1])
     url = f'{settings.get_backend_url}{settings.POST_PATH}/{post_id}'
     async with callback.bot.backend_session.get(url) as resp:
+        if resp.status == 404:
+            await callback.answer('Пост был удален администратором')
+            return await cmd_posts(callback.message)
         post = await resp.json()
     parsed_date = datetime.fromisoformat(post['created_at'])
     formatted_date = parsed_date.strftime('%d.%m.%Y %H:%M')
